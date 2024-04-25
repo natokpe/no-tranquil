@@ -1,0 +1,20 @@
+{
+    "name": "natokpe/no-tranquil",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "NatOkpe\\Wp\\Theme\\Tranquil\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Nat Okpe",
+            "email": "me@nat.com.ng"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "spatie/calendar-links": "^1.8"
+    }
+}
