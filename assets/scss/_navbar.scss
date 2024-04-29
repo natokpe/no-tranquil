@@ -1,0 +1,346 @@
+@use 'variables' as *;
+
+.navbar {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: $color-white;
+    transition: $transition;
+    position: fixed;
+    top: 0;
+    z-index: $z-index-nav;
+    box-shadow: 0 2px 28px 0 rgba(0, 0, 0, .06);
+
+    @at-root {
+        body.page-scroll & {
+            top: -47px;
+        }
+    }
+
+    .topbar {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        border-bottom: 1px solid #00000021;
+
+        &-content {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 46px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            align-content: center;
+
+            &-left {}
+
+            &-right {}
+        }
+
+        &-links {
+            margin: 0;
+            padding: 0;
+
+            ul {
+                margin: 0;
+                padding: 0;
+                display: inline-block;
+                list-style-type: none;
+
+                li {
+                    margin: 0 {
+                        right: 25px;
+                    };
+                    padding: 0;
+                    display: inline-block;
+                    color: #424155;
+                    position: relative;
+                    list-style-type: none;
+                    font-size: 14px;
+
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        top: 5px;
+                        right: -15px;
+                        width: 1px;
+                        height: 15px;
+                        background-color: #dbdbdb78;
+                    }
+
+                    &:last-child {
+                        margin: 0;
+
+                        &:before {
+                            display: none;
+                        }
+                    }
+
+                    .topbar-link {
+                        color: inherit;
+                        font-size: 14px;
+                        transition: $transition;
+                        text-decoration: none;
+                        font-family: $font-family-body;
+
+
+                        &:hover {
+                            color: $color-primary;
+                        }
+
+                        .topbar-link-icon {
+                            margin-right: 5px;
+                        }
+
+                        .topbar-link-label {
+                            display: none;
+
+                            &.faq {
+                                display: inline-block;
+                            }
+
+                            @media (min-width: $grid-breakpoint-md-min) {
+                                display: inline-block;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .mainbar {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+
+        &-content {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            min-height: 75px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            align-content: center;
+
+            .brand {
+                margin: 0;
+                padding: 0;
+                display: inline-block;
+                text-decoration: none;
+
+                &-img {
+                    margin: 0;
+                    padding: 0;
+                    display: inline-block;
+                    max-width: 200px;
+
+                    @include text-ellipsis();
+                }
+            }
+
+            &-right {
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                align-items: center;
+                align-content: center;
+            }
+
+            .navbar-menu {
+                margin: 0;
+                padding: 0;
+                display: none;
+
+                @media (min-width: $grid-breakpoint-lg-min) {
+                    display: inline-block;
+                }
+
+                .menu-list {
+                    margin: 0;
+                    padding: 0;
+                    display: inline-block;
+                    list-style-type: none;
+
+                    .menu-item {
+                        margin: 0 10px;
+                        padding: 0;
+                        display: inline-block;
+                        list-style-type: none;
+                        color: #424155;
+
+                        &.current-menu-item {
+                            color: $color-primary;
+                        }
+
+                        a {
+                            margin: 0;
+                            padding: 2px;
+                            display: inline-block;
+                            color: inherit;
+                            font-size: $font-size;
+                            font-family: $font-family-body;
+                            font-weight: 400;
+                            line-height: 1.5;
+                            text-decoration: none;
+                            transition: $transition;
+
+                            &:active,
+                            &:focus,
+                            &:hover {
+                                color: $color-primary;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .searchbar-toggle {
+                margin: 0 {
+                    left: 20px;
+                    right: 30px;
+                };
+                padding: 0;
+                display: inline-block;
+                font-size: 18px; // $font-size;
+                color: #424155;
+                background-color: transparent;
+                outline: none;
+                border: none;
+                cursor: pointer;
+            }
+
+            .navbar-cta {
+                margin: 0;
+                display: none;
+
+                @media (min-width: $grid-breakpoint-lg-min) {
+                    display: inline-block;
+                }
+            }
+
+            .mobile-nav-toggle {
+                margin: 0;
+                padding: 0;
+                display: inline-block;
+                font-size: 24px;
+                color: #424155;
+                background-color: transparent;
+                outline: none;
+                border: none;
+                cursor: pointer;
+                transition: $transition;
+
+                @media (min-width: $grid-breakpoint-lg-min) {
+                    display: none;
+                }
+
+                &:hover,
+                &:focus,
+                &:active {
+                    color: $color-primary;
+                }
+            }
+        }
+    }
+}
+
+.mobile-nav {
+    margin: 0;
+    padding: 0;
+    width: 300px;
+    background-color: $color-white;
+    box-shadow: 0 0 8 0 rgba(0, 0, 0, .4);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    transform: translateX(300px);
+    transition: $transition;
+    z-index: $z-index-nav;
+    visibility: hidden;
+    // opacity: 0;
+
+    @at-root {
+        body.mobile-nav-open & {
+            transform: translateX(0);
+            visibility: visible;
+            // opacity: 1;
+        }
+    }
+
+    &-close {
+        margin: 0;
+        padding: 16px;
+        color: $color-text-normal;
+        background-color: transparent;
+        outline: none;
+        border: none;
+    }
+
+    &-content {}
+
+    .navbar-menu-mobile {
+        margin: 30px 0 0;
+        padding: 0;
+        width: 100%;
+
+        .menu-list {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            list-style-type: none;
+
+            .menu-item {
+                margin: 5px 0;
+                padding: 0;
+                width: 100%;
+                display: block;
+                list-style: none;
+
+                a {
+                    margin: 0;
+                    padding: 10px 16px;
+                    width: 100%;
+                    display: inline-block;
+                    color: $color-black;
+
+                    &:hover,
+                    &:focus,
+                    &:active {
+                        color: $color-primary;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.searchbar {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: $color-white;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    transition: $transition;
+    z-index: $z-index-nav;
+    visibility: hidden;
+    opacity: 0;
+
+    @at-root {
+        body.searchbar-open & {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+}

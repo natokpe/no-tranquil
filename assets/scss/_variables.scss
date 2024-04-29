@@ -1,0 +1,98 @@
+
+$fa-style-family           : "Font Awesome 6 Free";
+$fa-font-path              : "./assets/fonts";
+
+$border-radius             : 5px;
+$color-primary             : rgb(224, 60, 51);
+// $color-secondary           : rgb(11, 14, 60);
+// $color-accent              : rgb(100, 127, 191);
+// $color-accent-2            : rgb(100, 127, 191);
+// $color-accent-3            : rgb(100, 127, 191);
+$color-soft                : #f4f7fc;
+$color-white               : rgb(255, 255, 255);
+$color-black               : #2a283e;
+// $color-success             : rgb(100, 127, 191);
+$color-warning             : #f6a61d;
+$color-danger              : rgb(224, 60, 51);
+
+$color-text-normal         : #818090;
+$color-text-muted          : rgb(80, 80, 80);
+
+// $line-color                : rgb(217, 222, 225);
+// --main-color: #e03c33;
+// --navber-color: #424155;
+// --bg-color: #eef4f8;
+// .bg-theme {
+//     background: var(--main-color);
+// }
+
+$font-family-body          : "Poppins Regular", sans-serif;
+$font-family-heading       : "Poppins Bold", sans-serif;
+$font-size                 : 16px;
+$font-size-10              : 0.7142857143rem;
+$font-size-11              : 0.7857142857142857rem;
+$font-size-12              : 0.8571428571rem;
+$font-size-13              : 0.9285714285714286rem;
+$font-size-15              : 1.071428571428571rem;
+$font-size-16              : 1.142857142857143rem;
+$font-size-18              : 1.285714285714286rem;
+$font-size-20              : 1.4rem;
+$font-size-30              : 2.142857142857143rem;
+
+$grid-breakpoint-xs-min    : 0;
+$grid-breakpoint-sm-min    : 576px;
+$grid-breakpoint-md-min    : 768px;
+$grid-breakpoint-lg-min    : 992px;
+$grid-breakpoint-xl-min    : 1200px;
+$grid-breakpoint-xxl-min   : 1400px;
+
+$icon-font                 : "Font Awesome 6 Free";
+
+$transition                : all .3s ease-in-out;
+$transition-fast           : all .15s ease;
+$transition-slow           : all .4s ease;
+
+$wp-admin-bar-breakpoint    : 782px;
+$wp-admin-bar-height        : 32px;
+$wp-admin-bar-height-mobile : 46px;
+$wp-preset-font-size-normal : 16px;
+$wp-preset-font-size-huge   : 42px;
+
+$z-index-splash-screen     : 1000000000000;
+$z-index-wp-admin-bar      : 99999;
+$z-index-nav               : 10000;
+$z-index-overlay           : 11000;
+
+@mixin keep-aspect-ratio ($size: 100) {
+    &:before {
+        content: "";
+        padding-top: #{ $size + '%' };
+        float: left !important;
+    }
+
+    &:after {
+        content: "";
+        display: block !important;
+        clear: both !important;
+    }
+}
+
+@mixin text-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+@mixin icon-font($icon: "") {
+    content: $icon;
+    font-family: $icon-font;
+    font-size: inherit;
+    font-style: normal;
+    font-variant-alternates: normal;
+    font-variant-caps: normal;
+    font-variant-east-asian: normal;
+    font-variant-ligatures: normal;
+    font-variant-numeric: normal;
+    font-variant-position: normal;
+    font-weight: 900;
+}

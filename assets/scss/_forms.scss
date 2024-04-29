@@ -1,0 +1,17 @@
+
+.form-control {
+  height: 60px;
+  border: none;
+  box-shadow: 0px 1px 13px 0px #0000000d;
+  padding: 10px 22px;
+  font-size: 16px;
+  background: #e03c3314;
+}
+
+.form-control:focus {
+  color: var(--heading-color);
+  background-color: #fff;
+  border: 1px solid var(--main-color);
+  outline: none;
+  box-shadow: none;
+}
