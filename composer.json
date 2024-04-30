@@ -1,6 +1,6 @@
 {
     "name": "natokpe/no-tranquil",
-    "type": "project",
+    "description": "A WordPress theme",
     "license": "MIT",
     "autoload": {
         "psr-4": {
