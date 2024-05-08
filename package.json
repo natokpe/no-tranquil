@@ -13,7 +13,8 @@
   },
   "scripts": {
     "test": "jest",
-    "sass": "sass --no-source-map --no-error-css --style=compressed --charset --load-path=node_modules assets/scss/_index.scss:style.css --watch",
+    "sass": "sass --source-map-urls=relative --embed-sources --stop-on-error --no-error-css --style=expanded --charset --load-path=node_modules assets/scss/_index.scss:style.css&&sass --no-source-map --stop-on-error --no-error-css --style=compressed --charset --load-path=node_modules assets/scss/_index.scss:style.css",
+    "sass-watch": "sass --no-source-map --stop-on-error --no-error-css --style=compressed --charset --load-path=node_modules assets/scss/_index.scss:style.css --watch",
     "webpack": "webpack --mode production --config webpack.config.js"
   },
   "author": "Nat Okpe",
