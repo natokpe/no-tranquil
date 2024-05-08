@@ -13,9 +13,10 @@
   },
   "scripts": {
     "test": "jest",
-    "sass": "sass --source-map-urls=relative --embed-sources --stop-on-error --no-error-css --style=expanded --charset --load-path=node_modules assets/scss/_index.scss:style.css&&sass --no-source-map --stop-on-error --no-error-css --style=compressed --charset --load-path=node_modules assets/scss/_index.scss:style.css",
-    "sass-watch": "sass --no-source-map --stop-on-error --no-error-css --style=compressed --charset --load-path=node_modules assets/scss/_index.scss:style.css --watch",
-    "webpack": "webpack --mode production --config webpack.config.js"
+    "sass": "sass --source-map-urls=relative --embed-sources --stop-on-error --no-error-css --style=compressed --charset --load-path=node_modules assets/scss/_index.scss:style.css",
+    "sass-watch": "sass --source-map-urls=relative --embed-sources --stop-on-error --no-error-css --style=compressed --charset --load-path=node_modules assets/scss/_index.scss:style.css --watch",
+    "webpack": "webpack --mode production --config webpack.config.js",
+    "webpack-watch": "webpack --mode production --env watch --config webpack.config.js"
   },
   "author": "Nat Okpe",
   "license": "ISC",

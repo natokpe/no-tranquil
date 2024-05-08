@@ -3,8 +3,8 @@ const webpack = require( 'webpack' );
 
 module.exports = ( env, options ) => {
     return {
-        mode    : 'production',
-        watch   : false,
+        mode    : options.mode ? options.mode : 'none',
+        watch   : env.watch,
         devtool : false,
 
         entry   : {
@@ -13,6 +13,7 @@ module.exports = ( env, options ) => {
 
         output: {
             path    : path.join(__dirname),
+            // filename: '[name]' + ( options.mode === 'production' ? '.min' : '' ) + '.js'
             filename: '[name].js'
         },
 
