@@ -3,14 +3,12 @@
 /style.css
 /script.js
 
-/composer.lock
-/package-lock.json
-
 # Configuration
 /.env
 
 # Build
 /build/
+/dist/
 
 # Uploads
 /uploads/
@@ -20,6 +18,3 @@
 
 # Log files
 /logs/
-
-# htaccess
-/.htaccess
