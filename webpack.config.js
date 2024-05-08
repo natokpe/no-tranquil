@@ -4,7 +4,7 @@ const webpack = require( 'webpack' );
 module.exports = ( env, options ) => {
     return {
         mode    : 'production',
-        watch   : true,
+        watch   : false,
         devtool : false,
 
         entry   : {
