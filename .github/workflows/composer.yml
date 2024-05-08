@@ -56,11 +56,11 @@ jobs:
         name: no-tranquil
         path: |
           .
+          !.git
           !.github
           !assets/css
           !assets/js
           !assets/scss
-          !assets
           !build
           !dist
           !node_modules
