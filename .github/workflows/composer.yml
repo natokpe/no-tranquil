@@ -49,3 +49,27 @@ jobs:
 
     - name: Bundle scripts
       run: npm run webpack
+
+    - name: Save build
+      uses: actions/upload-artifact@v4
+        with:
+          name: no-tranquil
+          path: |
+            .
+            !.github
+            !assets/css
+            !assets/js
+            !assets/scss
+            !assets
+            !build
+            !dist
+            !node_modules
+            !.gitignore
+            !composer.json
+            !composer.lock
+            !package.json
+            !package-lock.json
+            !README.md
+            !script.js.LICENSE.txt
+            !style.css.map
+            !webpack.config.js
