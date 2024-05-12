@@ -11,7 +11,7 @@
 
 declare(strict_types = 1);
 
-use NatOkpe\Wp\Theme\Ecjp\Theme;
+use NatOkpe\Wp\Theme\Tranquil\Theme;
 
 get_header();
 

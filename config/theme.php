@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 /** Theme prefs */
 
-use NatOkpe\Wp\Theme\Ecjp\Theme;
+use NatOkpe\Wp\Theme\Tranquil\Theme;
 
 return [
     'text_domain'   => 'natokpe',

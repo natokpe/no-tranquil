@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-use NatOkpe\Wp\Theme\Ecjp\Theme;
+use NatOkpe\Wp\Theme\Tranquil\Theme;
 
 ?><section class="content-section why-us">
     <div  class="container">

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace NatOkpe\Wp\Theme\Ecjp\Loaders;
+namespace NatOkpe\Wp\Theme\Tranquil\Loaders;
 
 use \WP_Widget;
 

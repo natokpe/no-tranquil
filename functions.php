@@ -3,8 +3,8 @@ declare(strict_types = 1);
 
 require_once 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
-use NatOkpe\Wp\Theme\Ecjp\Theme;
-use NatOkpe\Wp\Theme\Ecjp\Config;
+use NatOkpe\Wp\Theme\Tranquil\Theme;
+use NatOkpe\Wp\Theme\Tranquil\Config;
 
 
 // define( 'WP_DEBUG', true );

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NatOkpe\Wp\Theme\Ecjp\Widgets;
+namespace NatOkpe\Wp\Theme\Tranquil\Widgets;
 
 use \WP_Widget;
 use \WP_Query;

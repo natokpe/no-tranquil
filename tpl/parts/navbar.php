@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-use NatOkpe\Wp\Theme\Ecjp\Theme;
+use NatOkpe\Wp\Theme\Tranquil\Theme;
 
 
 $navMenu = wp_nav_menu([

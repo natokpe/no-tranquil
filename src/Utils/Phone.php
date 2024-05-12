@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace NatOkpe\Wp\Theme\Ecjp\Utils;
+namespace NatOkpe\Wp\Theme\Tranquil\Utils;
 
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\PhoneNumberFormat;

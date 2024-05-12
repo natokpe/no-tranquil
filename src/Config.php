@@ -3,7 +3,7 @@
 
 declare(strict_types = 1);
 
-namespace NatOkpe\Wp\Theme\Ecjp;
+namespace NatOkpe\Wp\Theme\Tranquil;
 
 class Config
 {

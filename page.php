@@ -9,7 +9,7 @@
 
 declare(strict_types = 1);
 
-use NatOkpe\Ecjp\Theme\Theme;
+use NatOkpe\Wp\Theme\Tranquil\Theme;
 
 get_header();
 

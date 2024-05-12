@@ -3,10 +3,10 @@
 
 declare(strict_types = 1);
 
-namespace NatOkpe\Wp\Theme\Ecjp;
+namespace NatOkpe\Wp\Theme\Tranquil;
 
-use NatOkpe\Wp\Theme\Ecjp\Loaders\AssetLoader;
-use NatOkpe\Wp\Theme\Ecjp\Loaders\WidgetLoader;
+use NatOkpe\Wp\Theme\Tranquil\Loaders\AssetLoader;
+use NatOkpe\Wp\Theme\Tranquil\Loaders\WidgetLoader;
 
 use function \add_action;
 use function \add_theme_support;
