@@ -218,6 +218,19 @@ class Theme
             }
 
             // add_editor_style();
+
+            foreach ($this->_config->image_sizes as $slug => $__) {
+                if (! isset($__['width'])) {
+                    continue;
+                }
+
+                add_image_size(
+                    (string) $slug,
+                    (int) $__['width'],
+                    ((int) $__['height']) ?? null,
+                    ((bool) $__['crop']) ?? true,
+                );
+            }
         });
 
         $loader = (new AssetLoader([

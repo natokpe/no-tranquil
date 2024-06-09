@@ -62,6 +62,12 @@ class Config
     $_closed = false;
 
     /**
+     * @var array
+     */
+    private
+    $_image_sizes = [];
+
+    /**
      * 
      */
     public
@@ -84,6 +90,7 @@ class Config
                     break;
 
                 case 'theme':
+                    $this->_image_sizes   = $conf[$_]['image_sizes'];
                     $this->_text_domain   = $conf[$_]['text_domain'];
                     $this->_content_width = $conf[$_]['content_width'];
                     $this->_locale   = $conf[$_]['locale'];

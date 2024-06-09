@@ -14,17 +14,23 @@ return [
     'theme_support' => [
         'title-tag'                           => null,
         'automatic-feed-links'                => null,
-        'post-thumbnails'                     => ['page', 'post'],
+        'post-thumbnails'                     => [
+            'page',
+            'post',
+            'event',
+            'person',
+            'faq'
+        ],
         'post-formats'                        => [
-            'aside',
-            'gallery',
-            'link',
-            'image',
-            'quote',
-            'status',
-            'video',
-            'audio',
-            'chat'
+            // 'aside',
+            // 'gallery',
+            // 'link',
+            // 'image',
+            // 'quote',
+            // 'status',
+            // 'video',
+            // 'audio',
+            // 'chat'
         ],
 
         'html5'                               => [
@@ -50,4 +56,13 @@ return [
 
         'align-wide'                          => null
     ],
+
+    'image_sizes' => [
+        'image-32' => [
+            'width' => 32,
+            'height' => 32,
+            'crop' => true,
+        ],
+    ],
+
 ];
