@@ -206,7 +206,7 @@ class Theme
     {
         global $content_width;
 
-        load_theme_textdomain('thewedding', self::dir('lang'));
+        load_theme_textdomain('natokpe', self::dir('lang'));
 
         add_filter('locale', function ($locale) {
             return $this->_config->locale;
