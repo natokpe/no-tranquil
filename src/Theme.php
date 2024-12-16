@@ -8,41 +8,20 @@ namespace NatOkpe\Wp\Theme\Tranquil;
 use NatOkpe\Wp\Theme\Tranquil\Loaders\AssetLoader;
 use NatOkpe\Wp\Theme\Tranquil\Loaders\WidgetLoader;
 
+use \WP_Query;
+
 use function \add_action;
+use function \esc_attr;
 use function \add_theme_support;
+use function \add_filter;
+use function \remove_filter;
+use function \add_shortcode;
+use function \shortcode_atts;
+use function \wpautop;
 use function \get_stylesheet_directory;
 use function \get_stylesheet_directory_uri;
 use function \load_theme_textdomain;
 use function \cmb2_get_option;
-
-/**
- * The short description
- *
- * As many lines of extendend description as you want {@link element} links to an element
- * {@link http://www.example.com Example hyperlink inline link} links to a website
- * Below this goes the tags to further describe element you are documenting
- *
- * @param type $varname description
- * @param string $month 3-letter Month abbreviation
- * @param integer $day day of the month
- * @param integer $year year
- * @return type description
- * @access public
- * @author Nat Okpe <natokpe@gmail.com>
- * @copyright name date
- * @version 1.0.0
- * @see name of another element that can be documented, produces a link to it in the documentation
- * @link a url
- * @since a version or a date
- * @deprec alias for deprecated
- * @magic phpdoc.de compatibility
- * @todo phpdoc.de compatibility
- * @exception Javadoc-compatible, use as needed
- * @throws Javadoc-compatible, use as needed
- * @var type a data type for a class variable
- * @package package name
- * @subpackage sub package name, groupings inside of a project
- */
 class Theme
 {
     /**
@@ -58,6 +37,17 @@ class Theme
     function __construct(Config $config)
     {
         $this->_config = $config->close();
+    }
+
+    public static
+    function add_body_classes(string ...$body_classes): void
+    {
+        add_filter('body_class', function($classes) use ($body_classes)
+        {
+            // TODO: check uniqueness
+            // TODO: remove empty strings
+            return array_merge($classes, $body_classes);
+        });
     }
 
     /**
@@ -212,6 +202,11 @@ class Theme
             return $this->_config->locale;
         });
 
+        add_action('admin_init', function () {
+            add_theme_support('editor-styles');
+            add_editor_style('style.css');
+        });
+
         add_action('after_setup_theme', function () {
             foreach ($this->_config->theme_support as $_ => $__) {
                 add_theme_support($_, $__);
@@ -245,12 +240,209 @@ class Theme
 
         add_action('init', function () {
             register_nav_menus([
-                'navbar-menu'        => __('Nav Menu', 'thewedding'),
-                'navbar-menu-mobile' => __('Navbar Menu Mobile', 'ecjp'),
-                'footer-menu-1'         => __('Footer Menu 1', 'ecjp'),
-                'footer-menu-2'         => __('Footer Menu 2', 'ecjp'),
-                'footer-menu-3'         => __('Footer Menu 3', 'ecjp')
+                'navbar-menu'        => __('Nav Bar Menu', 'natokpe'),
+                'navbar-menu-mobile' => __('Nav Bar Menu (Mobile)', 'natokpe'),
+                'footer-menu-1'         => __('Footer Menu 1', 'natokpe'),
+                'footer-menu-2'         => __('Footer Menu 2', 'natokpe'),
+                'footer-menu-3'         => __('Footer Menu 3', 'natokpe')
             ]);
+
+            add_shortcode('list_people', function ($atts, $content = '') {
+                $args = [
+                    'post_type'    => 'person',
+                    'post_status'  => 'publish',
+                    'has_password' => false,
+
+                    'order'        =>
+                    in_array($atts['order'] ?? null, ['ASC', 'DESC'])
+                    ? $atts['order'] : 'ASC',
+
+                    'orderby'      => in_array(($atts['orderby'] ?? null), [
+                        'none', 'ID', 'date', 'modified', 'menu_order',
+                    ], true) ? $atts['orderby'] : 'menu_order',
+
+                    'nopaging' => true,
+                    'posts_per_page' => -1,
+                    'tax_query' => [
+                        [
+                            'taxonomy' =>'person-group',
+                            'field' => 'slug',
+                            'include_children' => false,
+                        ]
+                    ]
+                ];
+
+                if (ctype_digit($atts['limit'] ?? '')) {
+                    $limit = (int) $atts['limit'];
+
+                    if ($limit > 0) {
+                        $args['nopaging'] = false;
+                        $args['posts_per_page'] = $limit;
+                    }
+                }
+
+                if (! empty(($atts['group'] ?? ''))) {
+                    $args['tax_query'][0]['terms'] = $atts['group'];
+                }
+
+                $query = new WP_Query($args);
+
+                $people = [];
+
+                while ($query->have_posts()) {
+                    $query->the_post();
+
+                    $person = [
+                        'photo' => has_post_thumbnail() ?
+                        get_the_post_thumbnail_url() :
+                        Theme::url('assets/img/person.webp'),
+
+                        'name' => filter_var(
+                            get_post_meta(get_the_ID(), 'name', true),
+                            FILTER_CALLBACK,
+                            [
+                                'options' => function ($vl) {
+                                    return is_string($vl) ? $vl : '';
+                                },
+                            ],
+                        ),
+
+                        'name_prefix' => filter_var(
+                            get_post_meta(get_the_ID(), 'name_prefix', true),
+                            FILTER_CALLBACK,
+                            [
+                                'options' => function ($vl) {
+                                    return is_string($vl) ? $vl : '';
+                                },
+                            ],
+                        ),
+
+                        'name_suffix' => filter_var(
+                            get_post_meta(get_the_ID(), 'name_suffix', true),
+                            FILTER_CALLBACK,
+                            [
+                                'options' => function ($vl) {
+                                    return is_string($vl) ? $vl : '';
+                                },
+                            ],
+                        ),
+                    ];
+
+                    $roles = get_the_terms(get_the_ID(), 'person-role');
+                    $roles = ($roles !== false) ? $roles : [];
+
+                    foreach ($roles as $role) {
+                        $person['roles'][] = $role->name;
+                    }
+
+                    $person_link = filter_var(
+                        get_post_meta(get_the_ID(), 'social_fb', true),
+                        FILTER_VALIDATE_URL,
+                        [
+                            'default' => '',
+                        ],
+                    );
+
+                    if (! empty($person_link)) {
+                        $person['links']['fa-brands fa-facebook-f'] = $person_link;
+                    }
+
+                    // X
+                    $person_link = filter_var(
+                        get_post_meta(get_the_ID(), 'social_x', true),
+                        FILTER_VALIDATE_URL,
+                        [
+                            'default' => '',
+                        ],
+                    );
+
+                    if (! empty($person_link)) {
+                        $person['links']['fa-brands fa-x-twitter'] = $person_link;
+                    }
+
+                    // IG
+                    $person_link = filter_var(
+                        get_post_meta(get_the_ID(), 'social_ig', true),
+                        FILTER_VALIDATE_URL,
+                        [
+                            'default' => '',
+                        ],
+                    );
+
+                    if (! empty($person_link)) {
+                        $person['links']['fa-brands fa-instagram'] = $person_link;
+                    }
+
+                    // LinkedIn
+                    $person_link = filter_var(
+                        get_post_meta(get_the_ID(), 'social_in', true),
+                        FILTER_VALIDATE_URL,
+                        [
+                            'default' => '',
+                        ],
+                    );
+
+                    if (! empty($person_link)) {
+                        $person['links']['fa-brands fa-linkedin-in'] = $person_link;
+                    }
+
+                    $person_link = filter_var(
+                        get_post_meta(get_the_ID(), 'social_wa', true),
+                        FILTER_VALIDATE_URL,
+                        [
+                            'default' => '',
+                        ],
+                    );
+
+                    if (! empty($person_link)) {
+                        $person['links']['fa-brands fa-whatsapp'] = $person_link;
+                    }
+
+                    $person_link = filter_var(
+                        get_post_meta(get_the_ID(), 'social_tg', true),
+                        FILTER_VALIDATE_URL,
+                        [
+                            'default' => '',
+                        ],
+                    );
+
+                    if (! empty($person_link)) {
+                        $person['links']['fa-brands fa-telegram'] = $person_link;
+                    }
+
+                    $person_link = filter_var(
+                        get_post_meta(get_the_ID(), 'email', true),
+                        FILTER_VALIDATE_EMAIL,
+                        [
+                            'default' => '',
+                        ],
+                    );
+
+                    if (! empty($person_link)) {
+                        $person['links']['fa fa-envelope'] = 'mailto:' .
+                        $person_link;
+                    }
+
+                    $person_link = filter_var(
+                        get_post_meta(get_the_ID(), 'website', true),
+                        FILTER_VALIDATE_URL,
+                        [
+                            'default' => '',
+                        ],
+                    );
+
+                    if (! empty($person_link)) {
+                        $person['links']['fa fa-globe'] = $person_link;
+                    }
+
+                    $people[] = $person;
+                }
+
+                wp_reset_postdata();
+
+                return Tpl::load('list-people', $people);
+            });
+
         });
 
         $content_width = 800;

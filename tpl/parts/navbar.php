@@ -103,7 +103,7 @@ END;
                                     <li>
                                         <a class="topbar-link" href="<?= home_url() . '/faqs' ?>">
                                             <i class="topbar-link-icon fa-solid fa-circle-question"></i>
-                                            <span class="topbar-link-label faq">FAQs</span>
+                                            <span class="topbar-link-label faq">FAQ</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -129,14 +129,12 @@ END;
 
                             <?= $navMenu ?>
 
-                            <button class="searchbar-toggle" data-tippy-content="Search" tabindex="0">
-                                <i class="fa fa-solid fa-magnifying-glass"></i>
-                            </button>
-
                             <a class="button outline navbar-cta" href="<?= home_url() . '/contact-us' ?>">Get In Touch</a>
 
-                            <button class="mobile-nav-toggle" data-tippy-content="Menu" tabindex="0">
-                                <i class="fa fa-solid fa-bars"></i>
+                            <button class="mobile-nav-toggle" tabindex="0">
+                                <div class="hamburger">
+                                    <div class="hamburger-inner"></div>
+                                </div>
                             </button>
                         </div>
                     </div>
@@ -146,13 +144,12 @@ END;
     </div>
 </div>
 
+<div class="mobile-nav-overlay"></div>
+
 <div class="mobile-nav no-select">
-    <button class="mobile-nav-close"><i class="fa-solid fa-arrow-right"></i></button>
+    <button class="mobile-nav-close"><i class="fa-solid fa-chevron-right"></i></button>
 
     <div class="mobile-nav-content">
         <?= $mobileNavMenu ?>
     </div>
-</div>
-
-<div class="searchbar">
 </div>

@@ -1,0 +1,572 @@
+@use 'variables' as *;
+
+div {
+    margin: 0;
+    padding: 0;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+    display: block;
+}
+
+audio,
+canvas,
+progress,
+video {
+    display: inline-block;
+    vertical-align: baseline;
+}
+
+audio:not([controls]) {
+    display: none;
+    height: 0;
+}
+
+[hidden],
+template {
+    display: none;
+}
+
+a {
+    background: transparent;
+    text-decoration: none;
+    // -webkit-transition: all 0.3s ease-in-out 0.1s;
+    // transition: all 0.3s ease-in-out 0.1s;
+    font-family: $font-family-body;
+    display: inline-block;
+    outline: none;
+    transition: $transition;
+    color: $color-anchor;
+    text-decoration: none;
+    line-height: inherit;
+
+    &:active {
+        color: $color-anchor;
+        outline: none;
+        text-decoration: none;
+    }
+
+    &:hover {
+        outline: none;
+        cursor: pointer;
+        color: darken($color-anchor, 10%);
+        text-decoration: none;
+    }
+
+    &:focus {
+        color: darken($color-anchor, 15%);
+        text-decoration: none;
+        outline: none;
+    }
+
+    & img {
+        border: none;
+    }
+}
+
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+b, strong {
+  font-weight: bold;
+}
+
+dfn {
+  font-style: italic;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 1.25rem 0 .75rem;
+    padding: 0;
+    font-family: $font-family-body;
+    font-weight: 700;
+    font-style: normal;
+    color: lighten(#000, 20%);
+    text-rendering: optimizeLegibility;
+    line-height: 1.4;
+
+    small {
+        font-size: 60%;
+        color: #6f6f6f;
+        line-height: 0;
+    }
+}
+
+h1 {
+    font-size: 1.6rem;
+
+    @media only screen and (min-width: $grid-breakpoint-md-min) {
+        font-size: 2.1rem;
+    }
+}
+
+h2 {
+  font-size: 1.45rem;
+
+    @media only screen and (min-width: $grid-breakpoint-md-min) {
+        font-size: 1.7rem;
+    }
+}
+
+h3 {
+  font-size: 1.32rem;
+
+    @media only screen and (min-width: $grid-breakpoint-md-min) {
+        font-size: 1.45rem;
+    }
+}
+
+h4 {
+    font-size: 1.2rem;
+
+    @media only screen and (min-width: $grid-breakpoint-md-min) {
+        font-size: 1.2rem;
+    }
+}
+
+h5 {
+  font-size: 1.12rem;
+
+    @media only screen and (min-width: $grid-breakpoint-md-min) {
+        font-size: 1.14rem;
+    }
+}
+
+h6 {
+    font-size: 1.01rem;
+
+    @media only screen and (min-width: $grid-breakpoint-md-min) {
+        font-size: 1.1rem;
+    }
+}
+
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+small {
+  font-size: 80%;
+}
+
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+img {
+    border: 0;
+    max-width: 100%;
+    height: auto;
+    -ms-interpolation-mode: bicubic;
+    display: inline-block;
+    vertical-align: middle;
+
+    &::selection {
+        background-color: transparent;
+    }
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+figure {
+    margin: 0;
+    padding: 0;
+}
+
+hr {
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 0;
+    border: solid #ddd;
+    border-width: 1px 0 0;
+    clear: both;
+    margin: 2.5rem 0 2.4375rem;
+    height: 0;
+}
+
+p {
+    margin: 0 0 1.25rem;
+    font-family: inherit;
+    font-weight: normal;
+    font-size: 1rem;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    aside {
+        font-size: 0.875rem;
+        line-height: 1.35;
+        font-style: italic;
+    }
+}
+
+ul {
+    margin: 1.25rem 0 1.25rem;
+    padding: 0 {
+        left: 1.6rem;
+    };
+    font-size: 1rem;
+    line-height: 1.6;
+    // list-style-position: inside;
+    font-family: inherit;
+
+    &.circle li {
+        &::marker {
+            content: "\f111";
+            font-weight: 400;
+            font-family: $fa-style-family;
+            color: lighten($color-primary, 0%);
+            font-size: 80%;
+        }
+    }
+
+    &.check li {
+        &::marker {
+            content: "\f00c";
+            font-weight: 900;
+            font-family: $fa-style-family;
+            color: lighten($color-primary, 0%);
+            font-size: 80%;
+        }
+    }
+
+    li {
+        margin: 0 {
+            bottom: .6rem;
+        };
+        padding-left: .525rem;
+
+        &::marker {
+            content: "\f111";
+            font-weight: 900;
+            font-family: $fa-style-family;
+            color: lighten($color-primary, 5%);
+            font-size: 75%;
+        }
+
+        ul {
+            margin-left: 1.25rem;
+            margin-bottom: 0;
+        }
+
+        ol {
+            margin-left: 1.25rem;
+            margin-bottom: 0;
+        }
+    }
+
+    &.no-bullet {
+        margin-left: 0;
+        list-style: none;
+
+        li ul, &.no-bullet li ol {
+            margin-left: 1.25rem;
+            margin-bottom: 0;
+            list-style: none;
+        }
+    }
+}
+
+// ul.square li ul, ul.circle li ul, ul.disc li ul {
+//   list-style: inherit;
+// }
+
+// ul.square {
+//   list-style-type: square;
+//   margin-left: 1.1rem;
+// }
+
+// ul.circle {
+//   list-style-type: circle;
+//   margin-left: 1.1rem;
+// }
+
+// ul.disc {
+//   list-style-type: disc;
+//   margin-left: 1.1rem;
+// }
+
+ol {
+    margin: 1.25rem 0 1.25rem;
+    padding: 0 {
+        left: 1.6rem;
+    };
+    font-size: 1rem;
+    line-height: 1.6;
+    font-family: inherit;
+}
+
+dl {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+    list-style-position: outside;
+    font-family: inherit;
+}
+
+// ol {
+//   margin-left: 1.4rem;
+// }
+
+// ol li ul, ol li ol {
+//   margin-left: 1.25rem;
+//   margin-bottom: 0;
+// }
+
+details {
+    margin: 0;
+    padding: 0;
+    display: block;
+    width: 100%;
+    border: 1px solid lighten(#000, 85%);
+    max-height: auto;
+    transition: transform .25s ease;
+
+    &:first-of-type {
+        margin-top: 1.25rem;
+        border-top-left-radius: $border-radius;
+        border-top-right-radius: $border-radius;
+    }
+
+    &:last-of-type {
+        margin-bottom: 1.25rem;
+        border-bottom-left-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
+    }
+
+    & + & {
+        border-top: none;
+    }
+
+    :not(&):has(+ &) + & {
+        margin-top: 1.25rem;
+        border-top-left-radius: $border-radius;
+        border-top-right-radius: $border-radius;
+    }
+
+    &:has(+ :not(&)) {
+        margin-bottom: 1.25rem;
+        border-bottom-left-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
+    }
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    summary {
+        margin: 0;
+        padding: 1rem 1.1rem {
+            right: 2.1rem;
+        };
+        display: block;
+        width: 100%;
+        font-family: $font-family-body;
+        font-weight: 500;
+        font-size: .97rem;
+        color: lighten(#000, 20%);
+        list-style: none;
+        position: relative;
+        cursor: pointer;
+
+        &:marker {
+            display: none;
+        }
+
+        &:before {
+            content: "\f054";
+            font-weight: 900;
+            font-family: $fa-style-family;
+            color: lighten($color-primary, 0%);
+            font-size: 1rem;
+            display: inline-block;
+            position: absolute;
+            top: 50%;
+            right: 1.1rem;
+            transform: translateY(-50%);
+            transition: transform .25s ease;
+        }
+    }
+
+    &[open] {
+        max-height: 1000000px;
+        summary {
+            &:before {
+                transform: translateY(-50%) rotate(90deg);
+            }
+        }
+    }
+
+    p {
+        padding: 0 1.1rem 1rem;
+    }
+}
+
+code {
+    background: #f8f8f8;
+    border: solid 1px #ddd;
+    font-size: 13px;
+    padding: 0 4px;
+    border-radius: 3px;
+    font-family: Consolas, 'Liberation Mono', Courier, monospace;
+    font-weight: normal;
+    color: #333;
+    background-color: #ecf6f9;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #c7e7ed;
+    padding: 0.125rem 0.3125rem 0.0625rem;
+}
+
+blockquote {
+    margin: 0 0 1.25rem;
+    padding: 0.5625rem 1.25rem 0 1.1875rem;
+    padding: 10px 15px;
+    border: none;
+    border-left: 3px solid $color-primary;
+    border-radius: $border-radius;
+    font-size: 90%;
+    line-height: 1.6;
+    color: lighten(#000, 25%);
+    background-color: lighten(#000, 97%);
+
+    & :first-child {
+        margin-top: 0;
+    }
+
+    & :last-child {
+        margin-bottom: 0;
+    }
+
+    cite {
+        display: block;
+        font-size: 0.8125rem;
+        color: #555555;
+
+        &:before {
+            content: "\2014 \0020";
+        }
+
+        a {
+            color: #555555;
+
+            &:visited {
+                color: #555555;
+            }
+        }
+    }
+
+    p {
+        font-size: 1em;
+        line-height: 1.6;
+        color: #6f6f6f;
+    }
+}
+
+pre {
+    font-size: 13px;
+    line-height: 18px;
+    padding: 7px 10px;
+    margin-bottom: 0;
+    font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+
+    code {
+        padding: 0;
+        background: none;
+        border: none;
+        font-size: inherit;
+        border-radius: none;
+    }
+}
+
+em, i {
+  font-style: italic;
+  line-height: inherit;
+}
+
+strong, b {
+  font-weight: bold;
+  line-height: inherit;
+}
+
+small {
+  font-size: 60%;
+  line-height: inherit;
+}
+
+dl dt {
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+}
+
+dl dd {
+  margin-bottom: 0.75rem;
+}
+
+abbr, acronym {
+  text-transform: uppercase;
+  font-size: 90%;
+  color: #333;
+  border-bottom: 1px dotted #ddd;
+  cursor: help;
+}
+
+abbr {
+  text-transform: none;
+}
+
+pre {
+  overflow: auto;
+}
+
+code, kbd, pre, samp {
+    font-family: monospace, monospace;
+    font-size: 1em;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    overflow: hidden;
+}
+
+td, th {
+  padding: 0;
+}

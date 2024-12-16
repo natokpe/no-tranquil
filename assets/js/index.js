@@ -7,7 +7,6 @@ import { EffectFade, Navigation, Pagination, Autoplay } from 'swiper/modules';
 $(document).ready(function() {
     "use strict";
 
-    const searchBarOpenClass    = 'searchbar-open';
     const mobileNavOpenClass    = 'mobile-nav-open';
     const splashscreenOpenClass = 'splashscreen';
     const pageScrollClass       = 'page-scroll';
@@ -52,18 +51,17 @@ $(document).ready(function() {
         },
     });
 
-    $(".backtotop").each(function (i, e)
+    $(".back-to-top").each(function (i, e)
     {
         $(this).on('click', function (e)
         {
-            e.preventDefault();
-            $(window).scrollTop = 0;
+            window.scrollTop = 0;
         });
     });
 
     var transformNavbar = function () {
         let $scr = $(window).scrollTop();
-        if ($scr > 0) {
+        if ($scr > 100) {
             $('body').addClass(pageScrollClass);
         } else {
             $('body').removeClass(pageScrollClass);
@@ -98,31 +96,6 @@ $(document).ready(function() {
         });
     });
 
-    $(".searchbar-close").each(function (i, e)
-    {
-        $(this).on('click', function (e)
-        {
-            $('body').removeClass(searchBarOpenClass);
-        });
-    });
-
-    $(".navbar .searchbar-toggle").each(function (i, e)
-    {
-        $(this).on('click', function (e)
-        {
-            $('body').toggleClass(searchBarOpenClass);
-        });
-    });
-
-    // $(".navbar .nav-search-toggle").each(function (i, e)
-    // {
-    //     $(this).on('click', function (e)
-    //     {
-    //         $('body').toggleClass(searchBarOpenClass);
-    //         console.log($(".navbar-search").children(".search-bar"));//.trigger("focus");
-    //     });
-    // });
-
     // $("body").on('click', function (e) {
     //     if ($('body').hasClass(searchBarOpenClass)) {
     //         var navSearch = $(".navbar-search .navbar-search-form, .navbar .nav-search-toggle");
@@ -132,36 +105,6 @@ $(document).ready(function() {
     //             $('body').removeClass(searchBarOpenClass);
     //         }
     //     }
-    // });
-
-    // $(".navbar-search .navbar-search-form .search-bar").each(function (i, e)
-    // {
-    //     var fld = $(this);
-    //     var srh = fld.siblings("button[type=submit]");
-    //     var ico = srh.children(".fi");
-
-    //     fld.on('change keypress keyup', function (e)
-    //     {
-    //         if (fld.val().toString().length > 0) {
-    //             ico.removeClass("fi-rs-search").addClass("fi-rs-cross");
-    //         } else {
-    //             ico.removeClass("fi-rs-cross").addClass("fi-rs-search");
-    //         }
-    //     });
-
-    //     srh.on("click", function (e) {
-    //         e.preventDefault();
-
-    //         if (ico.hasClass("fi-rs-cross")) {
-    //             fld.val("");
-    //             ico.removeClass("fi-rs-cross").addClass("fi-rs-search");
-    //             fld.trigger("focus");
-
-    //             return false;
-    //         }
-
-    //         return true;
-    //     });
     // });
 
     $('body').removeClass(splashscreenOpenClass);

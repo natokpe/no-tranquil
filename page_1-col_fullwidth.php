@@ -1,8 +1,6 @@
 <?php
 /**
- * Template Name: Legal
- * 
- * Privacy Policy
+ * Template Name: 1-Col Full-Width
  * 
  * @package NatOkpe
  */
@@ -27,15 +25,11 @@ while (have_posts()):
 
     <main class="frame-body mt-4 mb-5 pb-3">
         <div class="container">
-            <div class="row gy-5 gx-5">
+            <div class="row">
 
                 <div class="col-lg-9 col-xl-8">
                     <div class="post-details mb-3">
                         <h1 class="page-title"><?= get_the_title() ?></h1>
-
-                        <div class="post-details-date">
-                            Updated on: <time datetime="<?= get_post_modified_time('c') ?>"><?= get_post_modified_time('M j, Y \a\t g:i A') ?></time>
-                        </div>
 
 <?php if (has_post_thumbnail()): ?>
                         <div class="post-details-image">
@@ -43,18 +37,11 @@ while (have_posts()):
                         </div>
 <?php endif; ?>
                     </div>
-                    <div class="w-100">
-                        <?php the_content() ?>
-                    </div>
                 </div>
 
-<?php if (is_active_sidebar('legal-sidebar')): ?>
-                <div class="col-lg-3 col-xl-4">
-                    <div class="widgets">
-                        <?php dynamic_sidebar('legal-sidebar'); ?>
-                    </div>
+                <div class="col-12">
+                    <?php the_content() ?>
                 </div>
-<?php endif; ?>
 
             </div>
         </div>

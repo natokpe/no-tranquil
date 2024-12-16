@@ -15,6 +15,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "spatie/calendar-links": "^1.8"
+        "spatie/calendar-links": "^1.8",
+        "salesforce/handlebars-php": "^3.0"
     }
 }

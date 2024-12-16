@@ -3,6 +3,7 @@
 declare(strict_types = 1);
 
 use NatOkpe\Wp\Theme\Tranquil\Theme;
+use NatOkpe\Wp\Theme\Tranquil\Utils\Clock;
 
 $f1 = wp_nav_menu([
     'theme_location' => 'footer-menu-1',
@@ -106,15 +107,15 @@ END;
 }
 
 ?><!-- Footer Area -->
-<div class="content-footer">
+<div class="content-footer pt-5">
     <section class="container">
-        <div class="row">
+        <div class="row gx-5 gy-4">
             <div class="col-md-6 col-lg-4">
                 <div class="content-footer-tab">
                     <img class="content-footer-logo no-select" src="<?= Theme::url('assets/img/ecjp-brand.svg') ?>" alt="ECJP Logo">
-                    <p>The Ecumenical Centre for Justice and Peace (ECJP) is a faith-based NGO Founded in 1996 and registered in Nigeria 2007 with the CAC</p>
+                    <p class="content-footer-logo-desc">The Ecumenical Centre for Justice and Peace (ECJP) is a faith-based NGO Founded in 1996 and registered in Nigeria 2007 with the CAC</p>
 
-                    <nav class="social-icons mt-50 no-select">
+                    <nav class="social-icons no-select mt-4">
                         <ul>
                             <li>
                                 <a target="_blank" rel="noopener noreferrer" data-tippy-content="Facebook" href="https://www.facebook.com/profile.php?id=100093853145576"><i class="fa-brands fa-facebook-f"></i></a>
@@ -131,16 +132,13 @@ END;
                             <li>
                                 <a data-tippy-content="WhatsApp" href="#!"><i class="fa-brands fa-whatsapp"></i></a>
                             </li>
-                            <!-- <li>
-                                <a data-tippy-content="T" href="#!"><i class="fa-brands fa-telegram"></i></a>
-                            </li> -->
                         </ul>
                     </nav>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3 no-select">
                 <div class="content-footer-tab">
-                    <h3 class="content-footer-heading">Quick Links</h3>
+                    <h3 class="content-footer-heading">Organization</h3>
                     <?= $f1 ?>
                 </div>
             </div>
@@ -163,7 +161,7 @@ END;
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <p>Copyright &copy; 2023 <a href="<?= home_url() ?>">ECJP</a> | All Rights Reserved.</p>
+                    <p>Copyright &copy; <?= Clock::nowYear() ?> <a href="<?= home_url() ?>">ECJP</a> | All Rights Reserved.</p>
                 </div>
             </div>
         </div>

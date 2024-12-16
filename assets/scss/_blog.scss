@@ -1,0 +1,111 @@
+@use 'variables' as *;
+
+// .blog {
+//     margin: 0;
+//     padding: 0;
+//     width: 100%;
+//     display: block;
+//     background-color: $color-white;
+//     box-shadow: 6px 12px 24px rgba(0, 0, 0, 0.08);
+//     border-radius: $border-radius;
+//     overflow: hidden;
+
+//     &-image {
+//         margin: 0 0 10px;
+//         padding: 0;
+//         width: 100%;
+//         display: block;
+//         background-color: rgba(0, 0, 0, .1);
+//         overflow: hidden;
+//         position: relative;
+
+//         @include keep-aspect-ratio(60);
+
+//         img {
+//             margin: 0;
+//             display: block;
+//             width: 100%;
+//             height: 100%;
+//             object-fit: cover;
+//             position: absolute;
+//             top: 0;
+//             right: 0;
+//             bottom: 0;
+//             left: 0;
+//         }
+//     }
+
+//     &-body {
+//         padding: 16px;
+//     }
+
+//     &-tax {
+//         margin: 0 0 16px;
+//         padding: 0;
+//         width: 100%;
+//     }
+
+//     &-title {
+//         margin: 0;
+//         padding: 0;
+//         width: 100%;
+//         height: 70px;
+//         overflow: hidden;
+
+//         &:hover,
+//         &:focus,
+//         &:active {
+//             // color: $color-primary;
+//         }
+
+//         a {
+//             // display: inline-block;
+//             color: inherit;
+
+//             // @include text-ellipsis();
+//         }
+//     }
+
+//     &-excerpt {
+//         // display: inline-block;
+//         height: 48px;
+//         overflow: hidden;
+
+//         // @include text-ellipsis();
+//     }
+
+//     &-footer {
+//         margin: 0;
+//         padding: 16px;
+//     }
+
+//     &-date {
+//         margin: 0;
+//         padding: 0;
+//         display: flex;
+//         justify-content: flex-start;
+//         align-items: center;
+//         align-content: center;
+//         color: $color-text-normal;
+
+//         i {
+//             display: inline-block;
+//         }
+
+//         .date {
+//             margin: 0 {
+//                 left: 10px;
+//             };
+//             padding: 0;
+//             display: inline-block;
+//             font-size: $font-size;
+//         }
+//     }
+
+//     &-action {
+//         margin: 20px 0 0;
+//         padding: 0;
+//         display: block;
+//         align-items: left;
+//     }
+// }

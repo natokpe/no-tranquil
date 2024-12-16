@@ -1,43 +1,37 @@
 
-$fa-style-family           : "Font Awesome 6 Free";
-$fa-font-path              : "./assets/fonts";
+$fa-style-family: "Font Awesome 6 Free";
+$fa-font-path: "./assets/fonts";
 
-$border-radius             : 5px;
-$color-primary             : rgb(224, 60, 51);
-// $color-secondary           : rgb(11, 14, 60);
-// $color-accent              : rgb(100, 127, 191);
-// $color-accent-2            : rgb(100, 127, 191);
-// $color-accent-3            : rgb(100, 127, 191);
-$color-soft                : #f4f7fc;
-$color-white               : rgb(255, 255, 255);
-$color-black               : #2a283e;
-// $color-success             : rgb(100, 127, 191);
-$color-warning             : #f6a61d;
-$color-danger              : rgb(224, 60, 51);
+$border-radius:3px;
 
-$color-text-normal         : #818090;
-$color-text-muted          : rgb(80, 80, 80);
+$color-primary: #074799;
+$color-secondary: #001a6e; // rgb(11, 14, 60);
+$color-accent: rgb(224, 60, 51);
 
-// $line-color                : rgb(217, 222, 225);
-// --main-color: #e03c33;
-// --navber-color: #424155;
-// --bg-color: #eef4f8;
-// .bg-theme {
-//     background: var(--main-color);
-// }
+$color-white: #fff;
+$color-black: #000;
 
-$font-family-body          : "Poppins Regular", sans-serif;
-$font-family-heading       : "Poppins Bold", sans-serif;
-$font-size                 : 16px;
-$font-size-10              : 0.7142857143rem;
-$font-size-11              : 0.7857142857142857rem;
-$font-size-12              : 0.8571428571rem;
-$font-size-13              : 0.9285714285714286rem;
-$font-size-15              : 1.071428571428571rem;
-$font-size-16              : 1.142857142857143rem;
-$font-size-18              : 1.285714285714286rem;
-$font-size-20              : 1.4rem;
-$font-size-30              : 2.142857142857143rem;
+$color-anchor: rgb(224, 60, 51);
+$color-line: #E2E8F0;
+
+$color-success: #52be4f;
+$color-danger: #ff4c4c;
+$color-warning: #ffc302;
+
+$color-soft: #f4f7fc;
+
+$font-family-body: "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$font-family-heading: "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$font-size: 95%;
+$font-size-10: 0.7142857143rem;
+$font-size-11: 0.7857142857142857rem;
+$font-size-12: 0.8571428571rem;
+$font-size-13: 0.9285714285714286rem;
+$font-size-15: 1.071428571428571rem;
+$font-size-16: 1.142857142857143rem;
+$font-size-18: 1.285714285714286rem;
+$font-size-20: 1.4rem;
+$font-size-30: 2.142857142857143rem;
 
 $grid-breakpoint-xs-min    : 0;
 $grid-breakpoint-sm-min    : 576px;
@@ -46,11 +40,14 @@ $grid-breakpoint-lg-min    : 992px;
 $grid-breakpoint-xl-min    : 1200px;
 $grid-breakpoint-xxl-min   : 1400px;
 
-$icon-font                 : "Font Awesome 6 Free";
+$icon-font: "Font Awesome 6 Free";
 
-$transition                : all .3s ease-in-out;
-$transition-fast           : all .15s ease;
-$transition-slow           : all .4s ease;
+$transition: all .3s ease-in-out;
+$transition-fast: all .15s ease;
+$transition-slow: all .4s ease;
+
+$topbar-height: 47px;
+$navbar-height: 70px;
 
 $wp-admin-bar-breakpoint    : 782px;
 $wp-admin-bar-height        : 32px;

@@ -14,7 +14,7 @@
   "scripts": {
     "test": "jest",
     "sass": "sass --no-source-map --stop-on-error --no-error-css --style=compressed --charset --load-path=node_modules assets/scss/_index.scss:style.css",
-    "sass-watch": "sass --no-source-map --stop-on-error --no-error-css --style=compressed --charset --load-path=node_modules assets/scss/_index.scss:style.css --watch",
+    "sass-watch": "sass --no-source-map --no-error-css --style=compressed --charset --load-path=node_modules assets/scss/_index.scss:style.css --watch",
     "webpack": "webpack --mode production --config webpack.config.js",
     "webpack-watch": "webpack --mode production --env watch --config webpack.config.js"
   },

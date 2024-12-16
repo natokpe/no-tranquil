@@ -1,0 +1,42 @@
+@use 'variables' as *;
+
+.breadcrumb {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+
+    ol {
+        margin: 0;
+        padding: 0;
+        display: block;
+        width: 100%;
+        list-style-type: none;
+
+        li {
+            margin: 0;
+            padding: 0;
+            display: inline-block;
+            color: $color-white;
+
+            &.active {
+                // color: $color-text-normal;
+            }
+
+            &:not(:last-child):after {
+                font-size: 14px;
+                margin: 0 10px;
+                @include icon-font("\f061");
+            }
+
+            a {
+                color: inherit;
+
+                &:hover,
+                &:focus,
+                &:active {
+                    color: $color-primary;
+                }
+            }
+        }
+    }
+}

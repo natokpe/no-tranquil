@@ -1,21 +1,11 @@
 <?php
-/**
- * Template Name: News Details
- * 
- * News Details page
- * 
- * @package natokpe
- * @subpackage Ecjp
- * @since Ecjp 0.0.0
- */
-
 declare(strict_types = 1);
 
-use NatOkpe\Theme\Tranquil\Theme;
+use NatOkpe\Wp\Theme\Tranquil\Theme;
+
+Theme::add_body_classes('navbar-sticky');
 
 get_header();
-
-// $placeholder = get_stylesheet_directory_uri() . '/media/images/lazyloader.png';
 
 while (have_posts()):
     the_post();
@@ -32,62 +22,55 @@ while (have_posts()):
     }
 
     ?>
-<div class="content-frame">
-    <header class="content-frame-header pt-100">
+<div class="frame">
+    <header class="frame-header">
     <?php get_template_part('tpl/parts/navbar'); ?>
-
-        <div class="container">
-            <div class="row justify-content-end">
-                <div class="col-lg-3 col-xl-4">
-
-                    <nav class="breadcrumb no-select mt-40">
-                        <ol>
-                            <li data-tippy-content="Go to Home"><a href="<?= home_url() ?>"><i class="mr-5 fa fa-solid fa-home"></i> Home</a></li>
-                            <li data-tippy-content="Go to News"><a href="<?= home_url() . '/news' ?>">News</a></li>
-                            <li class="active" data-tippy-content="You are here!"><?= get_the_title() ?></li>
-                        </ol>
-                    </nav>
-
-                </div>
-            </div>
-        </div>
 
     </header>
 
-    <div class="content-frame-body mt-50 mb-80">
+    <main class="frame-body mt-4 mb-5">
         <div class="container">
-            <div class="row">
+            <div class="row gy-5 gx-5">
 
                 <div class="col-lg-9 col-xl-8">
-                    <div class="row">
-                        <div class="col-12">
-                            <span class="page-label no-select">News</span>
+                    <div class="post-details mb-3">
+                        <h1 class="page-title"><?= get_the_title() ?></h1>
+
+                        <div class="post-details-date">
+                            Published on: <time datetime="<?= get_the_time('c') ?>"><?= get_the_time('M j, Y \a\t g:i A') ?></time>
                         </div>
-                        <div class="col-12">
-                            <h1 class="page-heading mb-10"><?= get_the_title() ?></h1>
-                        </div>
-<?php if (has_post_thumbnail()): ?>
-                        <div class="col-12">
-                            <div class="featured-image">
-                                <img src="<?= get_the_post_thumbnail_url() ?>" alt="<?= get_the_title() ?>" />
-                            </div>
+
+<?php if (! empty($news_cat) && ($news_cat != 'Uncategorized')): ?>
+                        <div class="post-details-categories">
+                            <div class="post-category"><?= $news_cat ?></div>
                         </div>
 <?php endif; ?>
-                        <div class="col-12">
-                            <article <?php post_class('post-content'); ?>>
-                                <?php the_content() ?>
-                            </article>
+
+
+<?php if (has_post_thumbnail()): ?>
+                        <div class="post-details-image">
+                            <img src="<?= get_the_post_thumbnail_url() ?>" alt="<?= get_the_title() ?>" title="<?= get_the_title() ?>" />
                         </div>
+<?php endif; ?>
+                    </div>
+                    <div class="w-100">
+                        <?php the_content() ?>
                     </div>
                 </div>
 
+<?php if (is_active_sidebar('news-post-sidebar')): ?>
                 <div class="col-lg-3 col-xl-4">
+                    <div class="widgets">
+                        <?php dynamic_sidebar('news-post-sidebar'); ?>
+                    </div>
                 </div>
+<?php endif; ?>
+
             </div>
         </div>
-    </div>
+    </main>
 
-    <footer class="content-frame-footer">
+    <footer class="frame-footer">
         <?php get_template_part('tpl/parts/footer'); ?>
     </footer>
 </div>

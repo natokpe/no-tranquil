@@ -1,27 +1,13 @@
 @font-face {
-    font-family: 'Poppins Regular';
-    src: url('./assets/fonts/Poppins-Regular.eot');
-    src: local('Poppins Regular'), local('Poppins-Regular'),
-        url('./assets/fonts/Poppins-Regular.eot?#iefix') format('embedded-opentype'),
-        url('./assets/fonts/Poppins-Regular.woff2') format('woff2'),
-        url('./assets/fonts/Poppins-Regular.woff') format('woff'),
-        url('./assets/fonts/Poppins-Regular.ttf') format('truetype'),
-        url('./assets/fonts/Poppins-Regular.svg#Poppins-Regular') format('svg');
+    font-family: 'Open Sans';
+    src: url('./assets/fonts/OpenSans-Regular.eot');
+    src: local('Open Sans'), local('Open Sans Regular'), local('OpenSans-Regular'),
+        url('./assets/fonts/OpenSans-Regular.eot?#iefix') format('embedded-opentype'),
+        url('./assets/fonts/OpenSans-Regular.woff2') format('woff2'),
+        url('./assets/fonts/OpenSans-Regular.woff') format('woff'),
+        url('./assets/fonts/OpenSans-Regular.ttf') format('truetype'),
+        url('./assets/fonts/OpenSans-Regular.svg#OpenSans-Regular') format('svg');
     font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Poppins Bold';
-    src: url('./assets/fonts/Poppins-Bold.eot');
-    src: local('./assets/fonts/Poppins Bold'), local('Poppins-Bold'),
-        url('./assets/fonts/Poppins-Bold.eot?#iefix') format('embedded-opentype'),
-        url('./assets/fonts/Poppins-Bold.woff2') format('woff2'),
-        url('./assets/fonts/Poppins-Bold.woff') format('woff'),
-        url('./assets/fonts/Poppins-Bold.ttf') format('truetype'),
-        url('./assets/fonts/Poppins-Bold.svg#Poppins-Bold') format('svg');
-    font-weight: bold;
     font-style: normal;
     font-display: swap;
 }
