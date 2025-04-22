@@ -4,9 +4,12 @@ declare(strict_types = 1);
 
 use NatOkpe\Wp\Theme\Tranquil\Theme;
 
+$logo = get_theme_mod('custom_logo');
+$logo = (! empty((string) $logo)) ? wp_get_attachment_image_src((int) $logo, 'full', false) : null;
+$logo = is_array($logo) ? $logo[0] : '';
 
 $navMenu = wp_nav_menu([
-    'theme_location' => 'navbar-menu',
+    'theme_location' => 'navbar',
     'menu_class' => 'menu-list',
     'menu_id' => false,
     'container' => 'nav',
@@ -19,7 +22,7 @@ $navMenu = wp_nav_menu([
     'link_before' => '',
     'link_after' => '',
     'echo' => false,
-    'depth' => 1,
+    'depth' => 2,
     // 'items_wrap' => '',
     'item_spacing' => 'preserve', // Accepts 'preserve' or 'discard'. Default 'preserve'.
 ]);
@@ -31,39 +34,6 @@ $navMenu = <<<END
 <nav class="navbar-menu">
     <ul class="menu-list">
         <li class="menu-item current-menu-item"><a href="{$homeUrl}">Home</a></li>
-        <li class="menu-item"><a href="{$homeUrl}/about-us/">About Us</a></li>
-        <li class="menu-item"><a href="{$homeUrl}/contact-us/">Contact Us</a></li>
-    </ul>
-</nav>
-END;
-}
-
-$mobileNavMenu = wp_nav_menu([
-    'theme_location' => 'navbar-menu-mobile',
-    'menu_class' => 'menu-list',
-    'menu_id' => false,
-    'container' => 'nav',
-    'container_class' => 'navbar-menu-mobile',
-    'container_id' => false,
-    'container_aria_label' => '',
-    'fallback_cb' => false,
-    'before' => '',
-    'after' => '',
-    'link_before' => '',
-    'link_after' => '',
-    'echo' => false,
-    'depth' => 1,
-    // 'items_wrap' => '',
-    'item_spacing' => 'preserve', // Accepts 'preserve' or 'discard'. Default 'preserve'.
-]);
-
-if (! $mobileNavMenu) {
-$mobileNavMenu = <<<END
-<nav class="navbar-menu-mobile">
-    <ul class="menu-list">
-        <li class="menu-item current-menu-item"><a href="{$homeUrl}">Home</a></li>
-        <li class="menu-item"><a href="{$homeUrl}/about-us/">About Us</a></li>
-        <li class="menu-item"><a href="{$homeUrl}/contact-us/">Contact Us</a></li>
     </ul>
 </nav>
 END;
@@ -122,7 +92,7 @@ END;
                 <div class="col-12">
                     <div class="mainbar-content">
                         <a class="brand" href="<?= home_url() ?>">
-                            <img class="brand-img" src="<?= Theme::url('assets/img/ecjp-brand.svg') ?>" alt="<?php bloginfo('name'); ?>" />
+                            <img class="brand-img" src="<?php echo $logo; ?>" alt="<?php bloginfo('name'); ?>" />
                         </a>
 
                         <div class="mainbar-content-right">
@@ -150,6 +120,6 @@ END;
     <button class="mobile-nav-close"><i class="fa-solid fa-chevron-right"></i></button>
 
     <div class="mobile-nav-content">
-        <?= $mobileNavMenu ?>
+        <?= $navMenu ?>
     </div>
 </div>

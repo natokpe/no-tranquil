@@ -22,6 +22,12 @@ use function \get_stylesheet_directory;
 use function \get_stylesheet_directory_uri;
 use function \load_theme_textdomain;
 use function \cmb2_get_option;
+
+// use \FILTER_VALIDATE_URL;
+// use \FILTER_FLAG_SCHEME_REQUIRED;
+// use \FILTER_FLAG_HOST_REQUIRED;
+// use \FILTER_NULL_ON_FAILURE;
+
 class Theme
 {
     /**
@@ -240,12 +246,234 @@ class Theme
 
         add_action('init', function () {
             register_nav_menus([
-                'navbar-menu'        => __('Nav Bar Menu', 'natokpe'),
-                'navbar-menu-mobile' => __('Nav Bar Menu (Mobile)', 'natokpe'),
-                'footer-menu-1'         => __('Footer Menu 1', 'natokpe'),
-                'footer-menu-2'         => __('Footer Menu 2', 'natokpe'),
-                'footer-menu-3'         => __('Footer Menu 3', 'natokpe')
+                'navbar'        => __('Nav Bar', 'natokpe'),
+                'footer-1'         => __('Footer 1', 'natokpe'),
+                'footer-2'         => __('Footer 2', 'natokpe'),
+                'footer-3'         => __('Footer 3', 'natokpe')
             ]);
+
+            add_shortcode('hero_banner', function ($atts, $content = '') {
+                if (is_string($atts)) {
+                    return '';
+                }
+
+                $args = [
+                    'slides'  => [],
+                ];
+
+                $patterns = [
+                    'image'     => '/^slide_image_\d+$/',
+                    'title'     => '/^slide_title_\d+$/',
+                    'desc'      => '/^slide_desc_\d+$/',
+                    'link_url'  => '/^slide_link_url_\d+$/',
+                    'link_text' => '/^slide_link_text_\d+$/',
+                ];
+
+                foreach ( $patterns as $att_name => $pattern ) {
+                    foreach ( $atts as $att => $val ) {
+                        if ( is_string( $att ) && preg_match( $pattern, $att ) ) {
+                            switch ($att_name) {
+                                case 'link_url':
+                                    $args[ 'slides' ]
+                                    [ ( int ) explode( '_', $att )[ 3 ] ]
+                                    [ $att_name ] = $val;
+                                    break;
+
+                                case 'link_text':
+                                    $args[ 'slides' ]
+                                    [ ( int ) explode( '_', $att )[ 3 ] ]
+                                    [ $att_name ] = $val;
+                                    break;
+
+                                default:
+                                    $args[ 'slides' ]
+                                    [ ( int ) explode( '_', $att )[ 2 ] ]
+                                    [ $att_name ] = $val;
+                                    break;
+                            }
+                        }
+                    }
+                }
+
+                ksort($args[ 'slides' ]);
+
+                return Tpl::load('hero-banner', $args);
+            });
+
+            add_shortcode('title_text', function ($atts, $content = '') {
+                if (is_string($atts)) {
+                    return '';
+                }
+
+                $args = [
+                    'image'       => filter_var(
+                        $atts['image'] ?? '',
+                        FILTER_VALIDATE_URL
+                    ) ?? '',
+                    'margin'      => ($atts['margin'] ?? null) === '1',
+                    'heading'     => $atts['heading'] ?? '',
+                    'sub_heading' => $atts['sub_heading'] ?? '',
+                    'desc'        => $atts['desc'] ?? '',
+                    'link_text'   => $atts['link_text'] ?? 'Learn More',
+                    'link_url'       => filter_var(
+                        $atts['link_url'] ?? '',
+                        FILTER_VALIDATE_URL
+                    ) ?? '',
+                ];
+
+                $theme = strtolower($atts['theme'] ?? 'white');
+
+                if (in_array($theme, ['white', 'dark', 'tint'], true)) {
+                    $args['theme_' . $theme] = true;
+                } else {
+                    $args['theme_white'] = true;
+                }
+
+                $align = strtolower($atts['align'] ?? 'left');
+
+                if (in_array($align, ['left', 'center', 'right'], true)) {
+                    $args[$align] = true;
+                } else {
+                    $args['left'] = true;
+                }
+
+                return Tpl::load('title-text', $args);
+            });
+
+            add_shortcode('cta_banner', function ($atts, $content = '') {
+                if (is_string($atts)) {
+                    return '';
+                }
+
+                $args = [
+                    'image'       => filter_var(
+                        $atts['image'] ?? '',
+                        FILTER_VALIDATE_URL
+                    ) ?? '',
+                    'image_fixed' => ($atts['image_fixed'] ?? null) === '1',
+                    'title'       => $atts['title'] ?? '',
+                    'desc'        => $atts['desc'] ?? '',
+                    'link_text'   => $atts['link_text'] ?? 'Learn More',
+                    'link_url'    => filter_var(
+                        $atts['link_url'] ?? '',
+                        FILTER_VALIDATE_URL
+                    ) ?? '',
+                ];
+
+                return Tpl::load('cta-banner', $args);
+            });
+
+            add_shortcode('title_list', function ($atts, $content = '') {
+                if (is_string($atts)) {
+                    return '';
+                }
+
+                $args = [
+                    'image'       => filter_var(
+                        $atts['image'] ?? '',
+                        FILTER_VALIDATE_URL
+                    ) ?? '',
+                    'margin'      => ($atts['margin'] ?? null) === '1',
+                    'heading'     => $atts['heading'] ?? '',
+                    'sub_heading' => $atts['sub_heading'] ?? '',
+                    'items'       => [],
+                ];
+
+                $theme = strtolower($atts['theme'] ?? 'white');
+
+                if (in_array($theme, ['white', 'dark', 'tint'], true)) {
+                    $args['theme_' . $theme] = true;
+                } else {
+                    $args['theme_white'] = true;
+                }
+
+                $patterns = [
+                    'point'  => '/^item_\d+$/',
+                    'desc'   => '/^item_desc_\d+$/',
+                    'marker' => '/^item_marker_\d+$/',
+                ];
+
+                foreach ( $patterns as $att_name => $pattern ) {
+                    foreach ( $atts as $att => $val ) {
+                        if ( is_string( $att ) && preg_match( $pattern, $att ) ) {
+                            switch ($att_name) {
+                                case 'desc':
+                                    $args[ 'items' ]
+                                    [ ( int ) explode( '_', $att )[ 2 ] ]
+                                    [ $att_name ] = $val;
+                                    break;
+
+                                case 'marker':
+                                    break;
+
+                                default:
+                                    $args[ 'items' ]
+                                    [ ( int ) explode( '_', $att )[ 1 ] ]
+                                    [ $att_name ] = $val;
+                                    break;
+                            }
+                        }
+                    }
+                }
+
+                ksort($args[ 'items' ]);
+
+                return Tpl::load('title-list', $args);
+            });
+
+            add_shortcode('box_list', function ($atts, $content = '') {
+                /*
+                 * WordPress will pass $atts as a string if no attributes are
+                 * supplied to shortcode by user, in which case, do nothing
+                 * for this shortcode.
+                 */
+                if (is_string($atts)) {
+                    return '';
+                }
+
+                $args = [
+                    'image_start'  => filter_var(
+                        $atts['image_start'] ?? '',
+                        FILTER_VALIDATE_URL
+                    ) ?? '',
+                    'image'  => filter_var(
+                        $atts['image'] ?? '',
+                        FILTER_VALIDATE_URL
+                    ) ?? '',
+                    'margin' => ($atts['margin'] ?? null) === '1',
+                    'items'  => [],
+                ];
+
+                $patterns = [
+                    'text'  => '/^text_\d+$/',
+                    'icon'  => '/^icon_\d+$/',
+                    'title' => '/^title_\d+$/',
+                ];
+
+                foreach ( $patterns as $att_name => $pattern ) {
+                    foreach ( $atts as $att => $val ) {
+                        if ( is_string( $att ) && preg_match( $pattern, $att ) ) {
+                            $args[ 'items' ]
+                            [ ( int ) explode( '_', $att )[ 1 ] ]
+                            [ $att_name ] = $val;
+                        }
+                    }
+                }
+
+                ksort($args[ 'items' ]);
+
+                $i = 1;
+                foreach ($args[ 'items' ] as $_ => $__) {
+                    if ((strtolower($atts['style'] ?? '') === 'dark')
+                        || ((strtolower($atts['style'] ?? '') === 'alt')
+                            && (($i % 2) === 1))) {
+                        $args[ 'items' ][$_]['style_solid'] = true;
+                    }
+                    $i++;
+                }
+
+                return Tpl::load('box-list', $args);
+            });
 
             add_shortcode('list_people', function ($atts, $content = '') {
                 $args = [

@@ -13,7 +13,7 @@ use NatOkpe\Wp\Theme\Tranquil\Theme;
 
         <meta name="theme-color" content="black" />
 
-        <link id="favicon" rel="shortcut icon" href="<?= Theme::url('assets/img/favicon.ico') ?>" type="image/ico" />
+        <?php wp_site_icon(); ?>
 
         <script type="text/javascript">
             window.caspage = {

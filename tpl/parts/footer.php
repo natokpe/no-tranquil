@@ -5,105 +5,70 @@ declare(strict_types = 1);
 use NatOkpe\Wp\Theme\Tranquil\Theme;
 use NatOkpe\Wp\Theme\Tranquil\Utils\Clock;
 
-$f1 = wp_nav_menu([
-    'theme_location' => 'footer-menu-1',
-    'menu_class' => 'menu-list',
-    'menu_id' => false,
-    'container' => 'nav',
-    'container_class' => 'content-footer-menu',
-    'container_id' => false,
-    'container_aria_label' => '',
-    'fallback_cb' => false,
-    'before' => '',
-    'after' => '',
-    'link_before' => '',
-    'link_after' => '',
-    'echo' => false,
-    'depth' => 1,
-    // 'items_wrap' => '',
-    'item_spacing' => 'preserve', // Accepts 'preserve' or 'discard'. Default 'preserve'.
-]);
+$logo = get_theme_mod('custom_logo');
+$logo = (! empty((string) $logo)) ? wp_get_attachment_image_src((int) $logo, 'full', false) : null;
+$logo = is_array($logo) ? $logo[0] : '';
 
 $homeUrl = home_url();
 
-if (! $f1) {
-$f1 = <<<END
-<nav class="content-footer-menu">
-    <ul class="menu-list">
-        <li class="menu-item current-menu-item"><a href="{$homeUrl}">Home</a></li>
-        <li class="menu-item"><a href="{$homeUrl}/about-us/">Our Mission</a></li>
-        <li class="menu-item"><a href="{$homeUrl}/events/">Events</a></li>
-        <li class="menu-item"><a href="{$homeUrl}/news/">News</a></li>
-        <li class="menu-item"><a href="{$homeUrl}/contact-us/">Join Us</a></li>
-    </ul>
-</nav>
-END;
-}
+$menus = [
+    'footer-1' => [
+        'name' => 'Organization',
+        'menu' => <<<END
+            <nav class="content-footer-menu">
+                <ul class="menu-list">
+                    <li class="menu-item current-menu-item"><a href="{$homeUrl}">Home</a></li>
+                </ul>
+            </nav>
+        END,
+    ],
 
-$f2 = wp_nav_menu([
-    'theme_location' => 'footer-menu-2',
-    'menu_class' => 'menu-list',
-    'menu_id' => false,
-    'container' => 'nav',
-    'container_class' => 'content-footer-menu',
-    'container_id' => false,
-    'container_aria_label' => '',
-    'fallback_cb' => false,
-    'before' => '',
-    'after' => '',
-    'link_before' => '',
-    'link_after' => '',
-    'echo' => false,
-    'depth' => 1,
-    // 'items_wrap' => '',
-    'item_spacing' => 'preserve', // Accepts 'preserve' or 'discard'. Default 'preserve'.
-]);
+    'footer-2' => [
+        'name' => 'Support',
+        'menu' => <<<END
+            <nav class="content-footer-menu">
+                <ul class="menu-list">
+                    <li class="menu-item"><a href="{$homeUrl}/privacy-policy/">Privacy Policy</a></li>
+                </ul>
+            </nav>
+        END,
+    ],
 
-if (! $f2) {
-$f2 = <<<END
-<nav class="content-footer-menu">
-    <ul class="menu-list">
-        <li class="menu-item"><a href="{$homeUrl}/faqs/">FAQs</a></li>
-        <li class="menu-item"><a href="{$homeUrl}/about-us/">About Us</a></li>
-        <li class="menu-item"><a href="{$homeUrl}/contact-us/">Contact Us</a></li>
-        <li class="menu-item"><a href="{$homeUrl}/terms-of-service/">Terms of Service</a></li>
-        <li class="menu-item"><a href="{$homeUrl}/privacy-policy/">Privacy Policy</a></li>
-    </ul>
-</nav>
-END;
-}
+    'footer-3' => [
+        'name' => 'Our Network',
+        'menu' => <<<END
+            <nav class="content-footer-menu">
+                <ul class="menu-list">
+                    <li class="menu-item"><a href="{$homeUrl}">CRUDAN</a></li>
+                </ul>
+            </nav>
+        END,
+    ]
+];
 
-$f3 = wp_nav_menu([
-    'theme_location' => 'footer-menu-3',
-    'menu_class' => 'menu-list',
-    'menu_id' => false,
-    'container' => 'nav',
-    'container_class' => 'content-footer-menu',
-    'container_id' => false,
-    'container_aria_label' => '',
-    'fallback_cb' => false,
-    'before' => '',
-    'after' => '',
-    'link_before' => '',
-    'link_after' => '',
-    'echo' => false,
-    'depth' => 1,
-    // 'items_wrap' => '',
-    'item_spacing' => 'preserve', // Accepts 'preserve' or 'discard'. Default 'preserve'.
-]);
+foreach ($menus as $theme_location => &$_menu) {
+    $menu = wp_nav_menu([
+        'theme_location' => $theme_location,
+        'menu_class' => 'menu-list',
+        'menu_id' => false,
+        'container' => 'nav',
+        'container_class' => 'content-footer-menu',
+        'container_id' => false,
+        'container_aria_label' => '',
+        'fallback_cb' => false,
+        'before' => '',
+        'after' => '',
+        'link_before' => '',
+        'link_after' => '',
+        'echo' => false,
+        'depth' => 1,
+        // 'items_wrap' => '',
+        'item_spacing' => 'preserve', // Accepts 'preserve' or 'discard'. Default 'preserve'.
+    ]);
 
-if (! $f3) {
-$f3 = <<<END
-<nav class="content-footer-menu">
-    <ul class="menu-list">
-        <li class="menu-item"><a href="{$homeUrl}">CRUDAN</a></li>
-        <li class="menu-item"><a href="{$homeUrl}">BENGONET</a></li>
-        <li class="menu-item"><a href="{$homeUrl}">PBA</a></li>
-        <li class="menu-item"><a href="{$homeUrl}">CiSHAN</a></li>
-        <li class="menu-item"><a href="{$homeUrl}">AONN</a></li>
-    </ul>
-</nav>
-END;
+    if (is_string($menu) && (! empty($menu))) {
+        $_menu['menu'] = $menu;
+    }
 }
 
 ?><!-- Footer Area -->
@@ -112,8 +77,8 @@ END;
         <div class="row gx-5 gy-4">
             <div class="col-md-6 col-lg-4">
                 <div class="content-footer-tab">
-                    <img class="content-footer-logo no-select" src="<?= Theme::url('assets/img/ecjp-brand.svg') ?>" alt="ECJP Logo">
-                    <p class="content-footer-logo-desc">The Ecumenical Centre for Justice and Peace (ECJP) is a faith-based NGO Founded in 1996 and registered in Nigeria 2007 with the CAC</p>
+                    <img class="content-footer-logo no-select" src="<?php echo $logo; ?>" alt="<?php bloginfo('name'); ?>" title="<?php bloginfo('name'); ?>">
+                    <p class="content-footer-logo-desc" title="<?php bloginfo('description'); ?>"><?php bloginfo('description'); ?></p>
 
                     <nav class="social-icons no-select mt-4">
                         <ul>
@@ -139,20 +104,20 @@ END;
             <div class="col-md-6 col-lg-3 no-select">
                 <div class="content-footer-tab">
                     <h3 class="content-footer-heading">Organization</h3>
-                    <?= $f1 ?>
+                    <?= $menus['footer-1']['menu'] ?>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3 no-select">
                 <div class="content-footer-tab">
                     <h3 class="content-footer-heading">Support</h3>
-                    <?= $f2 ?>
+                    <?= $menus['footer-2']['menu'] ?>
                 </div>
             </div>
 
             <div class="col-md-6 col-lg-2 no-select">
                 <div class="content-footer-tab">
                     <h3 class="content-footer-heading">Our Network</h3>
-                    <?= $f3 ?>
+                    <?= $menus['footer-3']['menu'] ?>
                 </div>
             </div>
         </div>
@@ -160,8 +125,12 @@ END;
     <section class="content-footer-copyright no-select">
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <p>Copyright &copy; <?= Clock::nowYear() ?> <a href="<?= home_url() ?>">ECJP</a> | All Rights Reserved.</p>
+                <div class="col-md-10">
+                    <p>Copyright &copy; <?= Clock::nowYear() ?> <a href="<?= home_url() ?>"><?php bloginfo('name'); ?></a> | All Rights Reserved.</p>
+                </div>
+
+                <div class="col-md-2">
+                    <p style="text-align: right;"><a href="<?php echo home_url('/wp-sitemap.xml'); ?>" title="Sitemap"><i class="fa-solid fa-sitemap"></i></a> <a class="ms-3" href="<?php bloginfo('rss2_url'); ?>" title="RSS"><i class="fa-solid fa-rss"></i></a></p>
                 </div>
             </div>
         </div>

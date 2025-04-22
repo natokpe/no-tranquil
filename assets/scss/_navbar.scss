@@ -171,18 +171,42 @@
                     display: inline-block;
                     list-style-type: none;
 
-                    .menu-item {
+                    & > .menu-item {
                         margin: 0 10px;
                         padding: 0;
                         display: inline-block;
                         list-style-type: none;
                         color: #424155;
+                        color: lighten(#000, 30%);
 
+                        &:active,
+                        &:focus,
+                        &:hover {
+                            color: $color-primary;
+                        }
+                        
                         &.current-menu-item {
                             color: $color-primary;
                         }
 
-                        a {
+                        &.menu-item-has-children {
+                            position: relative;
+                            cursor: pointer;
+
+                            &:after {
+                                @include icon-font("\f078");
+                                color: inherit;
+                                display: inline-block;
+                                font-size: .9rem;
+                                padding: 5px {
+                                    left: 1px;
+                                    right: 1px;
+                                };
+                                transition: $transition;
+                            }
+                        }
+
+                        & > a {
                             margin: 0;
                             padding: 2px;
                             display: inline-block;
@@ -193,11 +217,143 @@
                             line-height: 1.5;
                             text-decoration: none;
                             transition: $transition;
+                        }
 
-                            &:active,
-                            &:focus,
-                            &:hover {
-                                color: $color-primary;
+                        &.children-open {
+                            &:after {
+                                transform: rotate(180deg);
+                            }
+
+                            .sub-menu {
+                                visibility: visible;
+                            }
+                        }
+
+                        & > .sub-menu {
+                            margin: 0;
+                            padding: 8px 0;
+                            display: block;
+                            width: fit-content;
+                            list-style-type: none;
+                            position: absolute;
+                            top: calc(50% + (($navbar-height / 2) + 1px));
+                            background-color: #fff;
+                            z-index: $z-index-nav + 10;
+                            border: 1px solid lighten($color-black, 85%);
+                            border-top: none;
+                            border-radius: 0 0 $border-radius $border-radius;
+                            visibility: hidden;
+                            transition: visibility .25s ease;
+
+                            & > .menu-item {
+                                margin: 0;
+                                padding: 2px 0;
+                                display: block;
+                                list-style-type: none;
+                                color: #424155;
+
+                                &.current-menu-item {
+                                    color: $color-primary;
+                                }
+
+                                &.menu-item-has-children {
+                                    position: relative;
+                                    cursor: pointer;
+
+                                    &:after {
+                                        @include icon-font("\f078");
+                                        color: inherit;
+                                        display: inline-block;
+                                        font-size: .9rem;
+                                        padding: 5px {
+                                            left: 1px;
+                                            right: 1px;
+                                        };
+                                        transition: $transition;
+                                    }
+                                }
+
+                                &.children-open {
+                                    &:after {
+                                        transform: rotate(180deg);
+                                    }
+
+                                    .sub-menu {
+                                        visibility: visible;
+                                    }
+                                }
+
+                                & > a {
+                                    margin: 0;
+                                    padding: 8px 15px;
+                                    display: inline-block;
+                                    color: inherit;
+                                    font-size: $font-size;
+                                    font-family: $font-family-body;
+                                    font-weight: 400;
+                                    line-height: 1.5;
+                                    text-decoration: none;
+                                    transition: $transition;
+                                    white-space: nowrap;
+
+                                    &:active,
+                                    &:focus,
+                                    &:hover {
+                                        color: $color-primary;
+                                    }
+                                }
+
+                                .sub-menu {
+                                    margin: 0;
+                                    padding: 8px 0;
+                                    width: fit-content;
+                                    list-style-type: none;
+                                    position: absolute;
+                                    top: 0;
+                                    left: calc(100% + 2px);
+                                    background-color: #fff;
+                                    z-index: $z-index-nav + 10;
+                                    border: 1px solid lighten($color-black, 85%);
+                                    border-radius: $border-radius;
+                                    visibility: hidden;
+                                    transition: $transition;
+
+                                    & > .menu-item {
+                                        margin: 0;
+                                        padding: 2px 0;
+                                        display: block;
+                                        list-style-type: none;
+                                        color: #424155;
+
+                                        &.current-menu-item {
+                                            color: $color-primary;
+                                        }
+
+                                        &.menu-item-has-children {
+                                            position: relative;
+                                        }
+
+                                        & > a {
+                                            margin: 0;
+                                            padding: 8px 15px;
+                                            display: inline-block;
+                                            color: inherit;
+                                            font-size: $font-size;
+                                            font-family: $font-family-body;
+                                            font-weight: 400;
+                                            line-height: 1.5;
+                                            text-decoration: none;
+                                            transition: $transition;
+                                            white-space: nowrap;
+
+                                            &:active,
+                                            &:focus,
+                                            &:hover {
+                                                color: $color-primary;
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -308,7 +464,7 @@
 
     &-content {}
 
-    .navbar-menu-mobile {
+    .navbar-menu {
         margin: 30px 0 0;
         padding: 0;
         width: 100%;
@@ -330,6 +486,157 @@
 
                 &.current-menu-item {
                     color: $color-primary;
+                }
+
+                &.menu-item-has-children {
+                    position: relative;
+                    cursor: pointer;
+
+                    &:after {
+                        @include icon-font("\f078");
+                        color: inherit;
+                        display: inline-block;
+                        font-size: .9rem;
+                        padding: 5px {
+                            left: 1px;
+                            right: 1px;
+                        };
+                        transition: $transition;
+                        position: absolute;
+                        right: 10px;
+                        top: 0;
+                    }
+
+                    &.children-open {
+                        &:after {
+                            transform: rotate(180deg);
+                        }
+
+                        .sub-menu {
+                            visibility: visible;
+                        }
+                    }
+
+                    & > .sub-menu {
+                        margin: 0;
+                        padding: 0;
+                        display: block;
+                        width: 100%;
+                        list-style-type: none;
+                        background-color: lighten($color-black, 95%);
+                        transition: visibility .25s ease;
+
+                        & > .menu-item {
+                            margin: 0;
+                            padding: 0;
+                            display: block;
+                            list-style-type: none;
+                            color: #424155;
+
+                            &.current-menu-item {
+                                color: $color-primary;
+                            }
+
+                            &.menu-item-has-children {
+                                position: relative;
+                                cursor: pointer;
+
+                                &:after {
+                                    @include icon-font("\f078");
+                                    color: inherit;
+                                    display: inline-block;
+                                    font-size: .9rem;
+                                    padding: 5px {
+                                        left: 1px;
+                                        right: 1px;
+                                    };
+                                    transition: $transition;
+                                }
+                            }
+
+                            &.children-open {
+                                &:after {
+                                    transform: rotate(180deg);
+                                }
+
+                                .sub-menu {
+                                    visibility: visible;
+                                }
+                            }
+
+                            & > a {
+                                margin: 0;
+                                padding: 8px 15px;
+                                display: inline-block;
+                                color: inherit;
+                                font-size: $font-size;
+                                font-family: $font-family-body;
+                                font-weight: 400;
+                                line-height: 1.5;
+                                text-decoration: none;
+                                transition: $transition;
+                                white-space: nowrap;
+
+                                &:active,
+                                &:focus,
+                                &:hover {
+                                    color: $color-primary;
+                                }
+                            }
+
+                            .sub-menu {
+                                margin: 0;
+                                padding: 8px 0;
+                                width: fit-content;
+                                list-style-type: none;
+                                position: absolute;
+                                top: 0;
+                                left: calc(100% + 2px);
+                                background-color: #fff;
+                                z-index: $z-index-nav + 10;
+                                border: 1px solid lighten($color-black, 85%);
+                                border-radius: $border-radius;
+                                visibility: hidden;
+                                transition: $transition;
+
+                                & > .menu-item {
+                                    margin: 0;
+                                    padding: 2px 0;
+                                    display: block;
+                                    list-style-type: none;
+                                    color: #424155;
+
+                                    &.current-menu-item {
+                                        color: $color-primary;
+                                    }
+
+                                    &.menu-item-has-children {
+                                        position: relative;
+                                    }
+
+                                    & > a {
+                                        margin: 0;
+                                        padding: 8px 15px;
+                                        display: inline-block;
+                                        color: inherit;
+                                        font-size: $font-size;
+                                        font-family: $font-family-body;
+                                        font-weight: 400;
+                                        line-height: 1.5;
+                                        text-decoration: none;
+                                        transition: $transition;
+                                        white-space: nowrap;
+
+                                        &:active,
+                                        &:focus,
+                                        &:hover {
+                                            color: $color-primary;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
 
                 a {
